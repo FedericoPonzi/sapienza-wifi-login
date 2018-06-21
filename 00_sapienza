@@ -1,0 +1,13 @@
+#!/bin/bash
+# File: /etc/NetworkManager/dispatcher.d/00_sapienza
+set -e
+
+LOGIN_SCRIPT="/home/federicoponzi/.local/bin/sapienza_login"
+declare -a ESSIDS=("sapienza" "colossus")
+
+for ssid in ${ESSIDS[@]} ; do 
+	if [ "$(iwgetid | grep ':"'$ssid'"')" ]; then
+		${LOGIN_SCRIPT}
+	fi
+done
+

@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# File ~/.local/sapienza_login
+import requests
+
+login_data = {"auth_user" : "123456","auth_pass" : "password"}
+
+def login():
+    r = requests.head("http://neverssl.com", allow_redirects=True, timeout=2)
+    url = r.url
+    data = {**login_data, "zone" : "wifi_sapienza", "accept" : "Accetto - Accept", "redirurl" : "https://google.it"} #default, sapienza
+    if("colossus" in url):
+        data = {**login_data, "auth_voucher" : "", "CHKBOX1" : "1", "CHKBOX2" : "2", "accept" : "Accedi"} # colossus data.
+    res = requests.post(url, data=data, timeout= 2)
+
+def main():
+    try:
+        res = login()
+    except requests.exceptions.ReadTimeout as e:
+        return True
+    return True
+def checkConnection():
+    urlToCheck = "https://fponzi.me"
+    try:
+        data = requests.get(urlToCheck)
+        return True
+    except Exception as e:
+        print("Errore nel test della connessione! :( (Exception:{})".format(e))
+        return False
+
+
+if __name__ == "__main__":
+    print("Welcome to the brand new sapienza wifi connector. I'm going to log you in bro gimme a sec..")
+    while not (main() and checkConnection()):
+        print("Something went wrong! :( Going to retry...")
+    print("You're up and running! Have a nice day :-)")
+
