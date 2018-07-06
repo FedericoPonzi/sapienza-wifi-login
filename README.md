@@ -4,7 +4,7 @@ Questi semplici script permettono di eseguire in automatico il login al captive 
 
  * `bash`
  * `python3`, con la libreria requests (installabile con `pip3 install requests --user`)
- * `iwgetid`, utilizzato per avere il nome della rete wifi.
+ * `iwgetid`, utilizzato per avere il nome della rete wifi (trovabile nel pacchetto `wireless_tools`)
 
 ## Installazione
 
